@@ -18,38 +18,42 @@ def com_choice(choices):
 ##Function that compares choices
 def compare(c1,c2):
     if c1 == c2:
-        return 'Tie Game, Play Again!'
+        return 'Tie Game, Play Again!\n'
     if c1 == 'rock':
         if c2 == 'scissors':
-            return 'Player 1 Wins!'
-        return 'Player 2 Wins!'
+            return 'Player 1 Wins!\n'
+        return 'Player 2 Wins!\n'
 
     if c1 == 'paper':
         if c2 == 'rock':
-            return 'Player 1 Wins!'
-        return 'Player 2 Wins!'
+            return 'Player 1 Wins!\n'
+        return 'Player 2 Wins!\n'
 
     if c1 == 'scissors':
         if c2 == 'paper':
-            return 'Player 1 Wins!'
-        return 'Player 2 Wins' 
+            return 'Player 1 Wins!\n'
+        return 'Player 2 Wins\n' 
 
-##Get Input
-p1_choice = (input('Rock, Paper, or Scissors? ')).lower()
+##Game will continue until "Quit" is entered
+while True:
+    ##Get Input
+    p1_choice = (input('Rock, Paper, or Scissors? Type "QUIT" to quit ')).lower()
 
-##Compare
+    ##Ensure valid input
+    if p1_choice in choices:
+        c2 = com_choice(choices)
 
-##Ensure valid input
-if p1_choice in choices:
-    c2 = com_choice(choices)
+        ##Output
+        print('Player 1 chooses {}'.format(p1_choice.capitalize()))
+        print('Player 2 chooses {}\n'.format(c2.capitalize()))
+        
+        ##Compare
+        print(compare(p1_choice, c2))
+    elif p1_choice == "quit":
+        break
+    else:
+        print('Please enter a valid input.')
 
-    ##Output
-    print('Player 1 chooses {}'.format(p1_choice.capitalize()))
-    print('Player 2 chooses {}'.format(c2.capitalize()))
-    print(compare(p1_choice, c2))
-    
-else:
-    print('Please enter a valid input.')
     
 
 
