@@ -7,7 +7,7 @@
 ##is shown
 
 
-##New Feature - Add Scoreboard to keep count of results
+##New Feature - Add Scoreboard to keep count of results 1.1
 
 import random
 
