@@ -6,10 +6,13 @@
 ##User inputs their choice, computer shows their choice, result
 ##is shown
 
+
+##New Feature - Add Scoreboard to keep count of results 1.1
+##New Feature - Add multiple computers/players
+
 import random
 
 choices = ['rock','paper','scissors']
-
 
 ##Function that returns computer choice
 def com_choice(choices):
@@ -34,27 +37,60 @@ def compare(c1,c2):
             return 'Player 1 Wins!\n'
         return 'Player 2 Wins\n' 
 
+##Counters
+p1_score = 0
+p2_score = 0
+tie_score = 0
+game_count=0
+
+##Welcome Screen
+while True:
+    print('WELCOME TO ROCK PAPER SCISSORS - HOW MANY PLAYERS WOULD YOU LIKE TO PLAY WITH? (MAX 4 PLAYERS)')
+    players = int(input())
+    if ((players <= 4) and (players >= 2)):
+        break
+    else:
+        print('Please enter a valid # of players.')
 ##Game will continue until "Quit" is entered
 while True:
     ##Get Input
-    p1_choice = (input('Rock, Paper, or Scissors? Type "QUIT" to quit ')).lower()
+    p1_choice = (input('Rock, Paper, or Scissors? Type "QUIT" to quit: ')).lower()
 
     ##Ensure valid input
     if p1_choice in choices:
         c2 = com_choice(choices)
-
-        ##Output
-        print('Player 1 chooses {}'.format(p1_choice.capitalize()))
-        print('Player 2 chooses {}\n'.format(c2.capitalize()))
         
-        ##Compare
-        print(compare(p1_choice, c2))
+        ##Output
+        print('\nPlayer 1 chooses {}'.format(p1_choice.capitalize()))
+        print('Player 2 chooses {}'.format(c2.capitalize()))
+
+        if players > 2:
+            addl_choices = {}
+            for i in range(3,int(players+1)):
+                addl_choices["c{}".format(str(i))] = com_choice(choices)
+                print('Player {} chooses {}'.format(str(i), addl_choices["c{}".format(str(i))].capitalize()))
+        
+        ##Compare and Output
+        results = (compare(p1_choice, c2))
+        print(results)
+        ##Display Results
+        game_count+=1
+        if results == 'Player 1 Wins!\n':
+            p1_score+=1
+        elif results == 'Player 2 Wins!\n':
+            p2_score+=1
+        else:
+            tie_score+=1
+        print('Game Count: {}'.format(game_count))
+        print("Player 1 Score: {} Player 2 Score: {} Tie Games: {}\n".format(p1_score,p2_score,tie_score))
+        
     elif p1_choice == "quit":
         break
     else:
         print('Please enter a valid input.')
 
-    
+
+        
 
 
 
